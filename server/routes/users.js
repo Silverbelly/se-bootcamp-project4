@@ -1,0 +1,93 @@
+import express from 'express';
+import mysql from 'mysql2';
+
+const router = express.Router();
+
+const connection = mysql.createPool({
+  connectionLimit: 10,
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'ga_forum',
+});
+
+// GET authenticate user
+router.get('/', async (req, res) => {
+  try {
+    if (Object.keys(req.body).length === 0) {
+      res.status(400).json({
+        status: 'error',
+        message: 'Invalid request. Please provide a username and password',
+      });
+      return;
+    }
+    const { userName, password } = req.body;
+    const data = await connection
+      .promise()
+      .query('SELECT * FROM users WHERE isActive = 1 AND userName = ? AND userPassword = MD5(?)', [userName, password]);
+    if (data[0].length === 0) {
+      res.status(401).json({
+        status: 'error',
+        message: 'Invalid username or password',
+      });
+    } else {
+      const user = data[0][0];
+      res.status(200).json({
+        status: 'success',
+        data: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          userName: user.userName, 
+          accessLevel: user.accessLevel,
+        }
+      });
+    }
+  }
+  catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal server error',
+    });
+  }
+});
+
+// POST register user
+router.post('/', async (req, res) => {
+  try {
+    const { firstName, lastName, userName, password } = req.body;
+    const result = await connection
+      .promise()
+      .query('INSERT INTO users (firstName, lastName, userName, userPassword) VALUES (?, ?, ?, MD5(?))', 
+        [firstName, lastName, userName, password], (err, result) => {
+          return result;
+        }
+      );
+      res.status(201).json({
+        status: 'created',
+        data: {
+          id: result[0].insertId,
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
+        }
+      });
+  }
+  catch (error) {
+    switch (error.code) {
+      case 'ER_DUP_ENTRY':
+        res.status(409).json({
+          status: 'error',
+          message: 'Username already exists',
+        });
+        break;
+      default:
+        res.status(500).json({
+          status: 'error',
+          message: 'Internal server error',
+        });
+    }
+  }
+});
+
+export default router;
