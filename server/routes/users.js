@@ -90,4 +90,11 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('*', (req, res) => {
+  res.status(404).json({
+    status: 'Not found',
+    message: 'Nothing to see here. Move along.',
+  });
+});
+
 export default router;

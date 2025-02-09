@@ -14,6 +14,10 @@ app.use('/users', users);
 app.use('/posts', posts);
 app.use('/topics', topics);
 
+app.get('/port', (req, res) => {
+  res.json({ port: PORT});
+});
+
 app.get('/', (req, res) => {
   res.send('Hello from the server!');
 });
