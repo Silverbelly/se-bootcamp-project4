@@ -1,25 +1,20 @@
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Register from './pages/Register';
+
 // import './App.css';
 
 function App() {
-
-  const getData = async () => {
-    try {
-      axios.get('http://localhost:3000')
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [user, setUser] = useState({ id: -1 });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={getData}>Get Data from Server</button>
-      </header>
-    </div>
+    <Routes>
+      <Route index element={<Login user={user} setUser={setUser} />} />
+      <Route path="/dashboard" element={<Dashboard user={user} setUser={setUser} />} />
+      <Route path="/register" element={<Register setUser={setUser} />} />
+    </Routes>
   );
 }
 

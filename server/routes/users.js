@@ -12,7 +12,7 @@ const connection = mysql.createPool({
 });
 
 // GET authenticate user
-router.get('/', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     if (Object.keys(req.body).length === 0) {
       res.status(400).json({
@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST register user
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const { firstName, lastName, userName, password } = req.body;
     const result = await connection
@@ -70,6 +70,7 @@ router.post('/', async (req, res) => {
           firstName: firstName,
           lastName: lastName,
           userName: userName,
+          accessLevel: 'U',
         }
       });
   }
@@ -78,7 +79,7 @@ router.post('/', async (req, res) => {
       case 'ER_DUP_ENTRY':
         res.status(409).json({
           status: 'error',
-          message: 'Username already exists',
+          message: 'Username already exists. Please choose a different Username.',
         });
         break;
       default:

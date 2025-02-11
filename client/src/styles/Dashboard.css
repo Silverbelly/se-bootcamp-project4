@@ -1,0 +1,24 @@
+.header-container {
+  background-color: #0f17ba;
+  padding: 10px;
+  color: #f0f0f0;
+  text-align: center;
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-nav-container {
+  background-color: #9e9ea9;
+  padding: 10px;
+  width: 15%;
+  height: calc(100vh - 50px);
+  float: left;
+}
+
+.main-container {
+  margin-left: 220px;
+  padding: 20px;
+  overflow-x: auto;
+}
