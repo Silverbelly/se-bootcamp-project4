@@ -55,11 +55,11 @@ router.post('/login', async (req, res) => {
 // POST register user
 router.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, userName, password } = req.body;
+    const { firstName, lastName, email, userName, password } = req.body;
     const result = await connection
       .promise()
-      .query('INSERT INTO users (firstName, lastName, userName, userPassword) VALUES (?, ?, ?, MD5(?))', 
-        [firstName, lastName, userName, password], (err, result) => {
+      .query('INSERT INTO users (firstName, lastName, email, userName, userPassword) VALUES (?, ?, ?, ?, MD5(?))', 
+        [firstName, lastName, email, userName, password], (err, result) => {
           return result;
         }
       );
@@ -83,6 +83,7 @@ router.post('/register', async (req, res) => {
         });
         break;
       default:
+        console.log(error);
         res.status(500).json({
           status: 'error',
           message: 'Internal server error',

@@ -27,7 +27,7 @@ function Login({ setUser }) {
     }
   }, [userValidated, setUser, navigate, userDetails]);
 
-  const validateUser = async (e) => {
+  const handleSubmit = async (e) => {
     const form = e.currentTarget;
     let formIsValid = form.checkValidity();
     if (formIsValid === false) {
@@ -77,7 +77,7 @@ function Login({ setUser }) {
       <Container fluid className="mt-5">
         <Row className="justify-content-center">
           <Col xs={11} sm={8} md={5} lg={4} xl={3} className="bg-dark rounded-4">
-            <Form noValidate validated={formValidated} className="p-3" onSubmit={validateUser}>
+            <Form noValidate validated={formValidated} className="p-3" onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label className="text-white">User Name</Form.Label>
                 <Form.Control type="text" placeholder="username" ref={userNameRef} required />
@@ -96,7 +96,7 @@ function Login({ setUser }) {
         </Row>
         <Row className="mt-3 justify-content-center">
           <Col xs={11} sm={8} md={5} lg={4} xl={3} className="rounded-4 text-center">
-            Already a member? <a href="/" onClick={showRegister} rel="noopener noreferrer">Register Now</a>
+            Not a member yet? <a href="/" className="ps-3" onClick={showRegister} rel="noopener noreferrer">Sign Up Now</a>
           </Col>
         </Row>
         <Row className="mt-3 justify-content-center">
