@@ -1,7 +1,3 @@
-li {
-  padding-top: 10px;
-}
-
-li:hover {
+.topic:hover {
   cursor: pointer;
 }

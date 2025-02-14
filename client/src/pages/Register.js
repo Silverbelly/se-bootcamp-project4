@@ -23,7 +23,8 @@ function Register({setUser}) {
   const emailRef = useRef();
   const userNameRef = useRef();
   const passwordRef = useRef();
-  
+  const confirmPasswordRef = useRef();
+
   useEffect(() => {
     if (userIsRegistered) {
       setUser(userDetails);
@@ -33,6 +34,11 @@ function Register({setUser}) {
   
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
+    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+      e.preventDefault();
+      setError({message: 'Password and Confirm Password do not match.', hidden: false});
+      return;
+    }
     let formIsValid = form.checkValidity();
     if (formIsValid === false) {
       e.preventDefault();
@@ -66,7 +72,7 @@ function Register({setUser}) {
     <div>
       <Container fluid className="mt-5">
         <Row className="justify-content-center">
-          <Col xs={11} sm={8} md={5} lg={4} xl={3} className="bg-dark rounded-4">
+          <Col xs={11} sm={8} md={5} lg={4} xl={3} className="bg-dark rounded-3">
             <Form noValidate validated={formValidated} className="p-3" onSubmit={handleSubmit}>
               <Row>
                 <Col>
@@ -95,8 +101,13 @@ function Register({setUser}) {
               </Form.Group>
               <Form.Group>
                 <Form.Label className="text-white mt-3">Password</Form.Label>
-                <Form.Control type="password" placeholder="password" ref={passwordRef} required />
+                <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
                 <Form.Control.Feedback type="invalid">Please enter your password</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label className="text-white mt-3">Confirm Password</Form.Label>
+                <Form.Control type="password" placeholder="Confirm password" ref={confirmPasswordRef} required />
+                <Form.Control.Feedback type="invalid">Please confirm your password</Form.Control.Feedback>
               </Form.Group>
               <Button variant="primary" className="mt-4 mb-2 p-2" type="submit">
                 Sign Up

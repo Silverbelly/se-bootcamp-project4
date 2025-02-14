@@ -76,7 +76,7 @@ function Login({ setUser }) {
     <div>
       <Container fluid className="mt-5">
         <Row className="justify-content-center">
-          <Col xs={11} sm={8} md={5} lg={4} xl={3} className="bg-dark rounded-4">
+          <Col xs={11} sm={8} md={5} lg={4} xl={3} className="bg-dark rounded-3">
             <Form noValidate validated={formValidated} className="p-3" onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label className="text-white">User Name</Form.Label>

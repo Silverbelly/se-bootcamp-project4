@@ -33,7 +33,7 @@ router.get('/:postId/comments', async (req, res) => {
     const { postId } = req.params;
     const data = await connection
       .promise()
-      .query('SELECT c.id, c.postId, c.userId, c.content, c.dateCommented, u.firstName, u.lastName'
+      .query('SELECT c.id, c.postId, c.userId, c.content, c.dateCommented, u.firstName, u.lastName, u.userName'
         + ' FROM comments c'
         + ' INNER JOIN users u on c.userId = u.id'
         + ' WHERE postId = ?'
@@ -62,11 +62,11 @@ router.get('/:postId/comments', async (req, res) => {
 // POST create a new post
 router.post('/', async (req, res) => {
   try {
-    const { topicId, userId, title, content } = req.body;
+    const { topicId, userId, content } = req.body;
     const result = await connection
       .promise()
-      .query('INSERT INTO posts (topicId, userId, title, content)'
-          + ' VALUES (?, ?, ?, ?)', [topicId, userId, title, content], (error, results) => {
+      .query('INSERT INTO posts (topicId, userId, content)'
+          + ' VALUES (?, ?, ?)', [topicId, userId, content], (error, results) => {
           return results;
         }
       );

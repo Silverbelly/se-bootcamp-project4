@@ -44,7 +44,7 @@ router.get('/:topicId/posts', async (req, res) => {
     const { topicId } = req.params;
     const data = await connection
       .promise()
-      .query('SELECT p.id, p.title, p.content, p.datePosted, u.id as userId, u.firstName, u.lastName'
+      .query('SELECT p.id, p.content, p.datePosted, u.id as userId, u.firstName, u.lastName'
           + ' FROM posts p'
           + ' INNER JOIN users u on p.userId = u.id'
           + ' WHERE topicId = ?'

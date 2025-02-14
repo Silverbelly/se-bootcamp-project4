@@ -1,22 +1,13 @@
 .comment {
   font-size: 0.7rem;
+  font-style: italic;
+  margin-bottom: 1rem;
 }
-.comment h5 {
-    padding-left: 8px;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    font-style: italic;
-}
+
 .comment p {
   padding-left: 15px;
 }
 
-.comment-button {
-  font-size: 0.7rem;
-  margin: 0.5rem 0 0.5rem 0.1rem;
-  padding: 8px 3px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  cursor: pointer;
+.comment-button, .chars-remaining {
+  font-size: 0.8rem !important;
 }
