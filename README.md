@@ -41,9 +41,7 @@ receive responses to those questions.  A database backend is utilized to store t
 ##### Future Improvements
 
 Ideas for future enhancements include:
-1. Add an administrator function to
-  1. allow for adding of new topics
-  2. deleting questions or comments found to be offensive
+1. Add an administrator function to allow for 1) adding of new topics and 2) deleting questions or comments found to be offensive
 2. Ability to share content with social media platforms
 
 
