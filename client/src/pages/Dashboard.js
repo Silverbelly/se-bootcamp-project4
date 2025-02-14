@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../components/TopicList/TopicList';
-import '../styles/Dashboard.css';
 import TopicList from '../components/TopicList/TopicList';
 import PostList from '../components/PostList/PostList';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import {Navbar, Nav} from 'react-bootstrap';
+import '../styles/Dashboard.css';
 
 function Dashboard({user, setUser}) {
 
